@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id "se.thinkcode.cucumber-runner" version "0.0.10"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    testImplementation 'io.cucumber:cucumber-java:7.0.0'
+    testImplementation 'com.codeborne:selenide:6.6.3'
+    testImplementation 'junit:junit:4.12'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.5'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.5.1'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+cucumber {
+    main = 'io.cucumber.core.cli.Main'
+    featurePath = 'src/test/resources/features'
+    plugin = ['pretty']
+    tags = '@test'
+}
+
+
+
+

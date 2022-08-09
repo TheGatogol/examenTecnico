@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "98cc0f3f-4815-4130-9e99-c1d6881c8d50",
+		"name": "Prueba_tecnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18044562"
+	},
+	"item": [
+		{
+			"name": "create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();\r",
+							"const ID_USER = jsonResponse.id;\r",
+							"const NAME = jsonResponse.name;\r",
+							"const EMAIL = jsonResponse.email;\r",
+							"const GENDER = jsonResponse.gender;\r",
+							"const STATUS = jsonResponse.status;\r",
+							"\r",
+							"pm.globals.set(\"ID_USER\", ID_USER);\r",
+							"pm.globals.set(\"NAME\", NAME);\r",
+							"pm.globals.set(\"EMAIL\", EMAIL);\r",
+							"pm.globals.set(\"GENDER\", GENDER);\r",
+							"pm.globals.set(\"STATUS\", STATUS);\r",
+							"\r",
+							"pm.test(\"Código de respuesta 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ID correcto\", function() {\r",
+							"    pm.expect(ID_USER).to.eql(ID_USER);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name correcto: Tenali Ramakrishna\", function() {\r",
+							"    pm.expect(NAME).to.eql(NAME);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Email correcto: correo@correo.com\", function() {\r",
+							"    pm.expect(EMAIL).to.eql(EMAIL);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Gender correcto: male\", function() {\r",
+							"    pm.expect(GENDER).to.eql(GENDER);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status correcto: active\", function() {\r",
+							"    pm.expect(STATUS).to.eql(STATUS);\r",
+							"});\r",
+							"\r",
+							"setTimeout(() => {}, 3000)\r",
+							"postman.setNextRequest('list user');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 3ac613345ea7a9e733b50483de99719ebaa3e6f43f8ed5ecfe5c2b6a23460e7a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Tenali Ramakrishna\", \r\n    \"gender\":\"male\", \r\n    \"email\":\"correo@correo.com\", \r\n    \"status\":\"active\"\r\n}"
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();\r",
+							"const ID_USER = jsonResponse[0].id;\r",
+							"const NAME = jsonResponse[0].name;\r",
+							"const EMAIL = jsonResponse[0].email;\r",
+							"const GENDER = jsonResponse[0].gender;\r",
+							"const STATUS = jsonResponse[0].status;\r",
+							"\r",
+							"console.log(\"list user INFO:\");\r",
+							"console.log(ID_USER);\r",
+							"console.log(NAME);\r",
+							"console.log(EMAIL);\r",
+							"console.log(GENDER);\r",
+							"console.log(STATUS);\r",
+							"\r",
+							"pm.test(\"Código de respuesta 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ID correcto\", function() {\r",
+							"    pm.expect(ID_USER).to.eql(ID_USER);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name correcto: Tenali Ramakrishna\", function() {\r",
+							"    pm.expect(NAME).to.eql(NAME);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Email correcto: correo@correo.com\", function() {\r",
+							"    pm.expect(EMAIL).to.eql(EMAIL);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Gender correcto: male\", function() {\r",
+							"    pm.expect(GENDER).to.eql(GENDER);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status correcto: active\", function() {\r",
+							"    pm.expect(STATUS).to.eql(STATUS);\r",
+							"});\r",
+							"\r",
+							"setTimeout(() => {}, 3000)\r",
+							"postman.setNextRequest('update user');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 3ac613345ea7a9e733b50483de99719ebaa3e6f43f8ed5ecfe5c2b6a23460e7a",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();\r",
+							"\r",
+							"const NAME = jsonResponse.name;\r",
+							"const EMAIL = jsonResponse.email;\r",
+							"const STATUS = jsonResponse.status;\r",
+							"\r",
+							"console.log(\"update user INFO:\");\r",
+							"\r",
+							"console.log(NAME);\r",
+							"console.log(EMAIL);\r",
+							"console.log(STATUS);\r",
+							"\r",
+							"pm.test(\"Código de respuesta 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name correcto: Tenali Ramakrishna\", function() {\r",
+							"    pm.expect(NAME).to.eql(NAME);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Email correcto: correo@correo.com\", function() {\r",
+							"    pm.expect(EMAIL).to.eql(EMAIL);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status correcto: active\", function() {\r",
+							"    pm.expect(STATUS).to.eql(STATUS);\r",
+							"});\r",
+							"\r",
+							"setTimeout(() => {}, 3000)\r",
+							"postman.setNextRequest('delete user');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 3ac613345ea7a9e733b50483de99719ebaa3e6f43f8ed5ecfe5c2b6a23460e7a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Allasani Peddana EDIT\", \r\n    \"email\":\"allasani.peddanaEDIT@15ce.com\", \r\n    \"status\":\"active\"\r\n}"
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users/{{ID_USER}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{ID_USER}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 3ac613345ea7a9e733b50483de99719ebaa3e6f43f8ed5ecfe5c2b6a23460e7a",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users/{{ID_USER}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{ID_USER}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
